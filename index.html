@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Html Counters</title>
+  </head>
+  <body>
+    <script>
+      const counter_values = [
+        "سبحان الله",
+        "الحمد لله",
+        "لا إله إلا الله",
+        "الله أكبر",
+        "لا حول ولا قوة إلا بالله العلي العظيم",
+      ];
+      var i = 0;
+      var count = 0;
+      counter_values.forEach((element) => {
+        const counter_element = document.createElement("div");
+        counter_element.id = "counter_" + i;
+        counter_element.innerHTML = element + " : ";
+        const span_item = document.createElement("span");
+        span_item.id = "value_" + i;
+        span_item.innerHTML = count;
+        counter_element.appendChild(span_item);
+        document.body.appendChild(counter_element);
+
+        counter_element.onclick = function counter_click() {
+          counterid = this.id;
+          const id = counterid.split("_");
+          var theDiv = document.getElementById("value_" + id[1]);
+          var value = parseInt(theDiv.innerHTML);
+          value++;
+          if (id[1] == null) id[1] = 0;
+          localStorage.setItem("value_" + id[1], JSON.stringify(value));
+          theDiv.innerHTML = localStorage.getItem("value_" + id[1]);
+        };
+        i++;
+      });
+
+      (keys = { ...localStorage }), (length = localStorage.length);
+      for (const [key, value] of Object.entries(keys)) {
+        var id = `${key}`;
+        var theDiv = document.getElementById(id);
+        theDiv.innerHTML = localStorage.getItem(`${key}`);
+      }
+      function counter_click(counterid) {
+        const id = counterid.split("_");
+        var theDiv = document.getElementById("value_" + id[1]);
+        var value = parseInt(theDiv.innerHTML);
+        value++;
+        if (id[1] == null) id[1] = 0;
+        localStorage.setItem("value_" + id[1], JSON.stringify(value));
+        theDiv.innerHTML = localStorage.getItem("value_" + id[1]);
+      }
+    </script>
+  </body>
+</html>
